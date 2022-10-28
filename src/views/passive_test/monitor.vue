@@ -68,9 +68,10 @@
       <el-table-column label="优先级" prop="prio"></el-table-column>
       <el-table-column label="源地址" prop="source"></el-table-column>
       <el-table-column label="目的地址" prop="dest"></el-table-column>
-      <el-table-column label="流量" prop="data_flow"></el-table-column>
-      <el-table-column label="总流量" prop="business_flow"></el-table-column>
-      <el-table-column label="平均时延" prop="avg_delay"></el-table-column>
+      <el-table-column label="流量/MB" prop="data_flow"></el-table-column>
+      <el-table-column label="总流量/MB" prop="business_flow"></el-table-column>
+      <el-table-column label="单点时延/ms" prop="avg_delay"></el-table-column>
+      <el-table-column label="往返时延/ms" prop="rtt"></el-table-column>
       <el-table-column label="速率趋势图" align="right">
         <template slot-scope="scope">
           <el-button
@@ -108,7 +109,7 @@ import { performance,rate } from '@/network/traffic.js'
         filter: 'source',
         filterWord: null,
         isSearch: false,
-        loading: true,
+        loading: false,
         tableData: [],
         tags: null,
         dialogStatusVisible: false,
@@ -134,7 +135,7 @@ import { performance,rate } from '@/network/traffic.js'
     mounted() {
       this.currentPage = 1;
       this.loading = true;
-
+      // this.getData1();
       getIPList('').then(res=>{
         this.cpe_ip_list = res.data.cpe_ips;
         this.business_ser_ip_list = res.data.business_ser_ips;
@@ -144,6 +145,67 @@ import { performance,rate } from '@/network/traffic.js'
       })
     },
     methods:{
+      getData1(){
+        let dataset = {
+          "count": 4,
+          "items": [
+            {
+              "avg_delay": 0.54485982461403,
+              "rtt": 1.25168497915648,
+              "business_flow": 76392938,
+              "business_name": "视频监控业务2",
+              "business_type": "视频类",
+              "data_flow": 76392938,
+              "dest": "192.168.123.51",
+              "end_time": "2022-07-15 22:26:29",
+              "prio": 1,
+              "source": "192.168.0.111",
+              "start_time": "2022-07-15 22:16:29"
+            },
+            {
+              "avg_delay": 0,
+              "rtt": 0,
+              "business_flow": 0,
+              "business_name": "测试业务1",
+              "business_type": "计量类",
+              "data_flow": 0,
+              "dest": "192.168.123.51",
+              "end_time": "2022-07-15 22:26:29",
+              "prio": 3,
+              "source": "192.168.0.106",
+              "start_time": "2022-07-15 22:16:29"
+            },
+            {
+              "avg_delay": 0,
+              "rtt": 0,
+              "business_flow": 76624388,
+              "business_name": "测试业务2",
+              "business_type": "控制类",
+              "data_flow": 0,
+              "dest": "192.168.123.51",
+              "end_time": "2022-07-15 22:26:29",
+              "prio": 1,
+              "source": "192.168.0.100",
+              "start_time": "2022-07-15 22:16:29"
+            },
+            {
+              "avg_delay": 0.54485982461403,
+              "rtt": 2.3543529741549,
+              "business_flow": 76624388,
+              "business_name": "测试3",
+              "business_type": "控制类",
+              "data_flow": 76624388,
+              "dest": "192.168.123.52",
+              "end_time": "2022-07-15 22:26:29",
+              "prio": 2,
+              "source": "192.168.0.111",
+              "start_time": "2022-07-15 22:16:29"
+            }
+          ]
+        };
+        this.pageNum = dataset.count;
+        this.tableData = dataset.items;
+      },
       getData(method) {
         if(method == 0) {
           let parmas = {
