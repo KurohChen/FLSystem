@@ -56,6 +56,7 @@ const routes = [
           { path: '/', redirect: 'equipments' },
           { path: 'equipments', name: 'equipments', component: () => import('../views/security/equipments.vue') },
           { path: 'warning', name: 'warning', component: () => import('../views/security/warning.vue') },
+          { path: 'actionLog', name: 'actionLog', component: () => import('../views/security/actionLog.vue') },
         ]
       },
       {

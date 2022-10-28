@@ -11,6 +11,7 @@
         >
           <el-menu-item index="/home/security/equipments"><i class="el-icon-menu"></i>设备列表</el-menu-item>
           <el-menu-item index="/home/security/warning"><i class="el-icon-menu"></i>告警统计</el-menu-item>
+          <el-menu-item index="/home/security/actionLog"><i class="el-icon-menu"></i>行为日志可信审计</el-menu-item>
         </el-menu>
       </el-aside>
       <el-main style="background-color: #fff;">

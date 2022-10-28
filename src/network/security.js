@@ -46,3 +46,10 @@ export function wariningDropList() {
     url: '/safety/list_warning_ipsmacs'
   })
 }
+
+export function getLogList(p) {
+  return request({
+    url: '/safety/list_operations',
+    params: {p}
+  })
+}
